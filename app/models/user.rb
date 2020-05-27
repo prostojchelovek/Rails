@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  def list_tests_by_level(level) #Создаю этот метод с расчетом на то, что в будущем у меня будет создана таблица examinations
+  has_many :examinations, dependet: :delete_all
+
+  def list_tests_by_level(level)
     Test
-      .joins("JOIN examinations ON examinations.user_id = #{id}") #Наверное, еще нужно будет соеденить все таблицы, чтобы моя БД стала
-      .where("tests.level = :level", level: level)                #полноценной, но этого не было в задании, поэтому пока не стал делать
+      .joins("JOIN examinations ON examinations.test_id = tests.id")
+      .where(level: level, examinations: { user_id: id })
   end
 end
