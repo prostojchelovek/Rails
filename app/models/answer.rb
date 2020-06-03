@@ -1,2 +1,2 @@
-class Answer < ApplicationRecord
+class Answer < ApplicationRecord 
 end
