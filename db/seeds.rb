@@ -7,31 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 tests = Test.create!([
-  {title: 'Ruby', level: 1},
-  {title: 'Rails', level: 1},
-  {title: 'HTML', level: 3},
-  {title: 'CSS'},
-  {title: 'Ruby', level: 2},
-  {title: 'Rails', level: 4},
-  {title: 'Rails', level: 2},
-  {title: 'Ruby', level: 3},
-  {title: 'HTML'},
-  {title: 'CSS', level: 1}
+  {title: 'Ruby', level: 1, author: users[0], category: categories[0]},
+  {title: 'Rails', level: 1, author: users[1], category: categories[1]},
+  {title: 'HTML', author: users[2], category: categories[2]},
+  {title: 'CSS', level: 1, author: users[5], category: categories[2]}
 ])
 
 answers = Answer.create!([
-  {correct: true, option: 'tag <a>'},
-  {option: 'tag <br>'},
-  {option: 'tag <p>'},
-  {correct: true, option: 'boolean'},
-  {option: 'integer'},
-  {option: ':name_var'},
-  {correct: true, option: 'dm'},
-  {option: 'em'},
-  {option: 'mm'},
-  {correct: true, option: 'app'},
-  {option: 'config'},
-  {option: 'public'}
+  {correct: true, option: 'tag <a>', question: questions[0]},
+  {option: 'tag <br>', question: questions[0]},
+  {option: 'tag <p>', question: questions[0]},
+  {correct: true, option: 'boolean', question: questions[3]},
+  {option: 'integer', question: questions[3]},
+  {option: ':name_var', question: questions[3]},
+  {correct: true, option: 'dm', question: questions[2]},
+  {option: 'em', question: questions[2]},
+  {option: 'mm', question: questions[2]},
+  {correct: true, option: 'app', question: questions[1]},
+  {option: 'config', question: questions[1]},
+  {option: 'public', question: questions[1]}
 ])
 
 users = User.create!([
@@ -44,10 +38,10 @@ users = User.create!([
 ])
 
 questions = Question.create!([
-  {description: 'Какой тег для ссылок?'},
-  {description: 'Основная папка в Rails?'},
-  {description: 'Не является допустимым значением длины?'},
-  {description: 'Какого типа данных нет в Ruby?'}
+  {description: 'Какой тег для ссылок?', test: tests[2]},
+  {description: 'Основная папка в Rails?', test: tests[1]},
+  {description: 'Не является допустимым значением длины?', test: tests[3]},
+  {description: 'Какого типа данных нет в Ruby?', test: tests[0]}
 ])
 
 categories = Category.create!([
@@ -57,8 +51,8 @@ categories = Category.create!([
 ])
 
 examinations = Examinations.create!([
-  {user_id: users[2].id, test_id: tests[3].id},
-  {user_id: users[4].id, test_id: tests[2].id},
-  {user_id: users[1].id, test_id: tests[3].id},
-  {user_id: users[0].id, test_id: tests[0].id}
+  {user: users[2], test: tests[3]},
+  {user: users[4], test: tests[2]},
+  {user: users[1], test: tests[3]},
+  {user: users[2], test: tests[0]}
 ])
