@@ -1,12 +1,12 @@
 class Test < ApplicationRecord
-  belongs_to :category
-  has_many :question, :dependent: :nullify
-  has_many :examinations, through: :users
-  has_many :answers, through: :questions
+  belongs_to :category, optional: true
   belongs_to :author, class_name: 'User', foreign_key: :author_id
+  has_many :questions, dependent: :destroy
+  has_many :users, through: :examinations
+  has_many :examinations, dependent: :destroy
 
   def self.sort_by_category(category)
-    joins('JOIN categories ON tests.category_id = categories.id')
+    joins(:categories)
       .where(categories: { title: category })
       .order(title: :desc)
       .pluck(:title)
