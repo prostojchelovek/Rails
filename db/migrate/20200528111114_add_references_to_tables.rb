@@ -6,4 +6,5 @@ class AddReferencesToTables < ActiveRecord::Migration[6.0]
     add_reference :examinations, :user, foreign_key: true
     add_reference :examinations, :test, foreign_key: true
     add_reference :tests, :author, foreign_key: {to_table: :users}
+  end
 end
