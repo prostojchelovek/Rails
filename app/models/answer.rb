@@ -9,5 +9,5 @@ class Answer < ApplicationRecord
   private
 
   def limiting_responses
-    errors.add(:option) if question.answers.count > 3
+    errors.add(:option) if question.answers.count >= 4
 end
