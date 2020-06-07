@@ -29,12 +29,12 @@ answers = Answer.create!([
 ])
 
 users = User.create!([
-  {name: 'Oliver', password: '12345', login: 'human111'},
-  {name: 'Jack', password: '1111', login: 'human223'},
-  {name: 'Charlie', password: '15243', login: 'human313'},
-  {name: 'Thomas', password: '54321', login: 'human444'},
-  {name: 'Jacob', password: '112233', login: 'human521'},
-  {name: 'Riley', password: '55555', login: 'human644'}
+  {name: 'Oliver', password: '12345', login: 'human111', email: 'oliver@mail.ru'},
+  {name: 'Jack', password: '1111', login: 'human223', email: 'jack@mail.ru'},
+  {name: 'Charlie', password: '15243', login: 'human313', email: 'charlie@mail.ru'},
+  {name: 'Thomas', password: '54321', login: 'human444', email: 'thomas@mail.ru'},
+  {name: 'Jacob', password: '112233', login: 'human521', email: 'jacob@mail.ru'},
+  {name: 'Riley', password: '55555', login: 'human644', email: 'riley@mail.ru'}
 ])
 
 questions = Question.create!([
