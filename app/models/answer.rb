@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
   validates :option, presence: true
   validate :limiting_responses, on: :create
 
-  scope :correct_answer, -> { where(correct: true) }
+  scope :correct, -> { where(correct: true) }
 
   private
 
