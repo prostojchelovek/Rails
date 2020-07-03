@@ -1,7 +1,7 @@
 <% if @test_passage.succesfully? %>
-  <h1 style='color: hsl(100,100%,50%)'>Test passed successfully</h1>
+  <h1 class='succes'>Test passed successfully</h1>
 <% else %>
-  <h1 style='color: hsl(0,100%,50%)'>Test failed</h1>
+  <h1 class='fail'>Test failed</h1>
 <% end %>
 <p style="color:hsl(<%= @test_passage.success_rate %>,100%,50%);">
   Result: <%= @test_passage.success_rate %>%
