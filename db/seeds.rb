@@ -48,10 +48,3 @@ answers = Answer.create!([
   {option: 'config', question: questions[1]},
   {option: 'public', question: questions[1]}
 ])
-
-examinations = Examination.create!([
-  {user: users[2], test: tests[3]},
-  {user: users[4], test: tests[2]},
-  {user: users[1], test: tests[3]},
-  {user: users[2], test: tests[0]}
-])
