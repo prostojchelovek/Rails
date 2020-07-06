@@ -3,8 +3,6 @@
 <% else %>
   <h1 class='fail'>Test failed</h1>
 <% end %>
-<p style="color:hsl(<%= @test_passage.success_rate %>,100%,50%);">
-  Result: <%= @test_passage.success_rate %>%
-</p>
+<p>Result: <%= @test_passage.success_rate %>%</p>
 
 <%= link_to 'Tests', tests_path %>
