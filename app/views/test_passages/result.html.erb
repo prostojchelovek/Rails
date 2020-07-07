@@ -1,7 +1,7 @@
 <% if @test_passage.succesfully? %>
-  <h1 class='succes'>Test passed successfully</h1>
+  <h1 class='nav nav user succes'>Test passed successfully</h1>
 <% else %>
-  <h1 class='fail'>Test failed</h1>
+  <h1 class='nav nav user fail'>Test failed</h1>
 <% end %>
 <p>Result: <%= @test_passage.success_rate %>%</p>
 
