@@ -5,13 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-users = User.create!([
-  {name: 'Oliver', password: '12345', login: 'human111', email: 'oliver@mail.ru'},
-  {name: 'Jack', password: '1111', login: 'human223', email: 'jack@mail.ru'},
-  {name: 'Charlie', password: '15243', login: 'human313', email: 'charlie@mail.ru'},
-  {name: 'Thomas', password: '54321', login: 'human444', email: 'thomas@mail.ru'},
-  {name: 'Jacob', password: '112233', login: 'human521', email: 'jacob@mail.ru'},
-  {name: 'Riley', password: '55555', login: 'human644', email: 'riley@mail.ru'}
+users = User.create!([  #Вход для этих данных будет невозможным, т.к. пароли не шифруются SHA1 и в БД имеют
+  {name: 'Oliver', password_digest: '12345', email: 'oliver@mail.ru'}, #ровно те же значения что и в seeds
+  {name: 'Jack', password_digest: '1111', email: 'jack@mail.ru'},
+  {name: 'Charlie', password_digest: '15243', email: 'charlie@mail.ru'},
+  {name: 'Thomas', password_digest: '54321', email: 'thomas@mail.ru'},
+  {name: 'Jacob', password_digest: '112233', email: 'jacob@mail.ru'},
+  {name: 'Riley', password_digest: '55555', email: 'riley@mail.ru'}
 ])
 
 categories = Category.create!([

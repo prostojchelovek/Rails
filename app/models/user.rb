@@ -7,6 +7,8 @@ class User < ApplicationRecord
                     uniqueness: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
 
+  has_secure_password
+
   def list_tests_by_level(level)
     tests.where(level: level)
   end
