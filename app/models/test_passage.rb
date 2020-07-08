@@ -26,7 +26,7 @@ class TestPassage < ApplicationRecord
   end
 
    def number_current_question
-     test.questions.count - unpassed_questions.count
+     test.questions.count - other_questions.count
    end
 
   private
@@ -35,13 +35,13 @@ class TestPassage < ApplicationRecord
     self.current_question = next_question
   end
 
-  def unpassed_questions
+  def other_questions
     test.questions.order(:id).where('id > ?', current_question.id)
   end
 
   def next_question
     if current_question
-      unpassed_questions.first
+      other_questions.first
     else
       test.questions.first
     end
