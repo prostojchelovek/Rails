@@ -1,0 +1,14 @@
+<p>Title: <%= @test.title %></p>
+<p>Category: <%= @test.category.title%></p>
+<p>Level: <%= @test.level %></p>
+<table>
+  <tr>
+    <th>Question</th>
+    <th colspan='2'>Actions</th>
+  </tr>
+
+  <%= render @test.questions %>
+</table>
+
+<%= link_to 'Create question', new_admin_test_question_path(@test.id) %> |
+<%= link_to 'Back', admin_tests_path %>

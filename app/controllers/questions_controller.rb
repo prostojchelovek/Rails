@@ -1,10 +1,9 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!
   before_action :find_test, only: %i[new create]
   before_action :find_question, only: %i[edit update show destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
-
+=begin
   def show
   end
 
@@ -55,4 +54,5 @@ class QuestionsController < ApplicationController
   def rescue_with_question_not_found
     render plain: 'Вопрос не найден'
   end
+=end
 end
