@@ -11,8 +11,8 @@ module TestGuru
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.time_zone = "Novosibirsk"
-    config.i18n.default_locale = :en #При обнаружении валидации рельсы не могут
-                                     #найти источник для перевода, поэтому пришлось изменить язык
+    config.i18n.default_locale = :en
+    config.autoload_paths << "#{Rails.root}/lib/clients"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
