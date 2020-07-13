@@ -1,5 +1,5 @@
 class GitHubClient
-  ROOT_ENDPOINT = 'https://api.github.com'
+  ROOT_ENDPOINT = 'https://api.github.com'.frezee
   ACCESS_TOKEN = ENV['ACCESS_TOKEN']
 
   def initialize

@@ -33,5 +33,5 @@ en:
   description: "A question about %{title} from TestGuru"
   test_passages:
     gist:
-      success: "Gist was successfully created"
+      success: "Gist %{link} was successfully created"
       failure: "An error occurred while saving gist"
