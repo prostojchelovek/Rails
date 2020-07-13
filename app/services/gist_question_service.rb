@@ -1,8 +1,12 @@
 class GistQuestionService
-  def initialize(question, client: nil)
+  def initialize(question, client = default_client)
     @question = question
     @test = @question.test
-    @client = client || Octokit::Client.new(access_token: ENV['ACCESS_TOKEN'])
+    @client = client
+  end
+
+  def default_client
+    Octokit::Client.new(access_token: ENV['ACCESS_TOKEN'])
   end
 
   def call
