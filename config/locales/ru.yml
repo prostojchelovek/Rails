@@ -1,0 +1,6 @@
+ru:
+  description: "Вопрос о %{title} от TestGuru"
+  test_passages:
+    gist:
+      success: "Gist %{link} успешно сохранен"
+      failure: "Во время сохранения gist произошла ошибка"
