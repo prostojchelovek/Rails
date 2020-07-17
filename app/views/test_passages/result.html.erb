@@ -3,6 +3,6 @@
 <% else %>
   <h1 class='fail'>Test failed</h1>
 <% end %>
-<p>Result: <%= @test_passage.success_rate %>%</p>
-
-<%= link_to 'Tests', tests_path %>
+<div class='progress'>
+  <div class="bar" data-percentage=<%= @test_passage.success_rate %> ></div>
+</div>
