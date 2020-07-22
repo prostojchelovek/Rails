@@ -11,9 +11,29 @@ class BadgeService
     end
   end
 
+  def type_of_badge(rule, parameter)
+    @user.badges.where(rule: rule, parameter: parameter)
+  end
+
+  def were_badges_issued?(rule, parameter)
+    type_of_badge(rule, parameter).count > 0
+  end
+
+  def last_badge_issued(rule, parameter)
+    @user.received_awards.where(badge: type_of_badge(rule, parameter)).order(created_at: :asc).last
+  end
+
   def category(category)
     if @test.category.title == category && @test_passage.succesfully?
-      Test.sort_by_category(category).count == @user.tests.sort_by_category(category).uniq.count
+      if were_badges_issued?('category', category)
+        Test.sort_by_category(category).count == @user.test_passages
+          .select{ |passed| passed.updated_at > last_badge_issued('category', category).updated_at }
+          .select{ |passed| passed.test.category.title == category && passed.succesfully?}.uniq.count
+      else
+        Test.sort_by_category(category).count == @user
+          .test_passages.select{ |passed| passed.test.category.title == category }
+          .select{ |passed| passed.succesfully? }.uniq.count
+      end
     end
   end
 
@@ -23,7 +43,17 @@ class BadgeService
 
   def level(level)
     if @test.level == level.to_i && @test_passage.succesfully?
-      Test.where(level: level).count == @user.tests.where(level: level).uniq.count
+      if were_badges_issued?('level', level)
+         Test.where(level: level.to_i).count == @user.test_passages
+          .select{|passed| passed.updated_at > last_badge_issued('level', level.to_i).updated_at }
+          .select{|passed| passed.test.level == level.to_i && passed.succesfully? }
+          .uniq.count
+      #  byebug
+      else
+        Test.where(level: level.to_i).count == @user.test_passages
+          .select{|passed| passed.test.level == level.to_i && passed.succesfully? }
+          .uniq.count
+      end
     end
   end
 end
