@@ -12,6 +12,7 @@ class TestPassage < ApplicationRecord
   def accept!(answer_ids)
     if correct_answer?(answer_ids)
       self.correct_questions += 1
+      self.passed = succesfully?
     end
 
     save!

@@ -1,4 +1,6 @@
 class BadgeService
+  RULES = %w[category level first_attempt].freeze
+
   def initialize(test_passage)
     @test_passage = test_passage
     @user = @test_passage.user
@@ -20,21 +22,18 @@ class BadgeService
   end
 
   def last_badge_issued(rule, parameter)
-    @user.received_awards.where(badge: type_of_badge(rule, parameter)).order(created_at: :asc).last
+    @user.received_awards.where(badge: type_of_badge(rule, parameter)).order(created_at: :asc).last.updated_at
   end
 
   def category(category)
-    if @test.category.title == category && @test_passage.succesfully?
+    return unless @test.category.title == category && @test_passage.succesfully?
       if were_badges_issued?('category', category)
-        Test.sort_by_category(category).count == @user.test_passages
-          .select{ |passed| passed.updated_at > last_badge_issued('category', category).updated_at }
-          .select{ |passed| passed.test.category.title == category && passed.succesfully?}.uniq.count
+        Test.sort_by_category(category).count == @user.tests.succes.sort_by_category(category)
+          .after_badge_issue(last_badge_issued('category', category)).uniq.count
       else
-        Test.sort_by_category(category).count == @user
-          .test_passages.select{ |passed| passed.test.category.title == category }
-          .select{ |passed| passed.succesfully? }.uniq.count
+        Test.sort_by_category(category).count == @user.tests.success
+          .sort_by_category(category).uniq.count
       end
-    end
   end
 
   def first_attempt(invisible_criterion)
@@ -42,18 +41,13 @@ class BadgeService
   end
 
   def level(level)
-    if @test.level == level.to_i && @test_passage.succesfully?
+    return unless @test.level == level.to_i && @test_passage.succesfully?
       if were_badges_issued?('level', level)
-         Test.where(level: level.to_i).count == @user.test_passages
-          .select{|passed| passed.updated_at > last_badge_issued('level', level.to_i).updated_at }
-          .select{|passed| passed.test.level == level.to_i && passed.succesfully? }
-          .uniq.count
-      #  byebug
+        Test.where(level: level.to_i).count == @user.tests.success.where(level: level)
+          .after_badge_issue(last_badge_issued('level', level)).uniq.count
       else
-        Test.where(level: level.to_i).count == @user.test_passages
-          .select{|passed| passed.test.level == level.to_i && passed.succesfully? }
-          .uniq.count
+        Test.where(level: level.to_i).count == @user.tests.success
+          .where(level: level).uniq.count
       end
-    end
   end
 end
