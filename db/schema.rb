@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_081215) do
+ActiveRecord::Schema.define(version: 2020_07_23_074546) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean "correct", default: false, null: false
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2020_07_12_081215) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "question_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.string "name"
+    t.string "picture"
+    t.string "rule"
+    t.string "parameter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rule", "parameter"], name: "index_badges_on_rule_and_parameter", unique: true
   end
 
   create_table "categories", force: :cascade do |t|
@@ -45,6 +55,15 @@ ActiveRecord::Schema.define(version: 2020_07_12_081215) do
     t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
+  create_table "received_awards", force: :cascade do |t|
+    t.integer "badge_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["badge_id"], name: "index_received_awards_on_badge_id"
+    t.index ["user_id"], name: "index_received_awards_on_user_id"
+  end
+
   create_table "test_passages", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "test_id", null: false
@@ -52,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_081215) do
     t.integer "correct_questions", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "passed", default: false, null: false
     t.index ["current_question_id"], name: "index_test_passages_on_current_question_id"
     t.index ["test_id"], name: "index_test_passages_on_test_id"
     t.index ["user_id"], name: "index_test_passages_on_user_id"
@@ -99,6 +119,8 @@ ActiveRecord::Schema.define(version: 2020_07_12_081215) do
   add_foreign_key "gists", "questions"
   add_foreign_key "gists", "users"
   add_foreign_key "questions", "tests"
+  add_foreign_key "received_awards", "badges"
+  add_foreign_key "received_awards", "users"
   add_foreign_key "test_passages", "questions", column: "current_question_id"
   add_foreign_key "test_passages", "tests"
   add_foreign_key "test_passages", "users"

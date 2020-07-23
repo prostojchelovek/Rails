@@ -35,3 +35,7 @@ en:
     gist:
       success: "Gist %{link} was successfully created"
       failure: "An error occurred while saving gist"
+  badge_rules:
+    category: 'Complete all tests in category'
+    first_attempt: 'Complete the test in a first attempt'
+    level: 'Complete all tests on the level'
